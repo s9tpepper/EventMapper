@@ -5,9 +5,6 @@ package ab.fl.utils.events.eventMapper
 	import flash.utils.Dictionary;
 	import flash.utils.describeType;
 	
-	import org.osflash.signals.Signal;
-	import org.osflash.signals.natives.NativeSignal;
-	
 	public class EventMapper
 	{
 		private var _eventDispatcher:EventDispatcher;
