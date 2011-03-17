@@ -1,0 +1,64 @@
+EventMapper 0.1 - READ ME/RTFM/DOCUMENTATION/etc
+-------------------------------------------------------------
+EventMapper is an AS3 event handling utility used to 
+configure how you handle events from any Event class 
+dispatched by any type of EventDispatcher object. If you
+have any questions about EventMapper, bugs you found or
+feature suggestions etc email me, or fork the source and
+let me know when you have something for me to merge! 
+
+omar [at] almerblank.com
+
+
+The usage example below is in Flex, but this code will work 
+in any AS3 project. The example below handles all events
+from the MouseEvent class and passes it to the method 
+handleMouseEvents. There are some examples of methods you 
+can use on EventMapper to do other things with it.
+
+Usage Example:
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import ab.fl.utils.events.eventMapper;
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var eventMapper:EventMapper = new EventMapper(myButton, MouseEvent, handleMouseEvents);
+				
+				// Stops the MouseEvent.MOVE events from going to the callback assigned.
+				//eventMapper.omit(MouseEvent.MOVE); 
+				
+				// Resumes events for MouseEvent.MOVE
+				//eventMapper.clearOmissions(); 
+				
+				// Checks if the CLICK event is currently registered.
+				//eventMapper.hasEvent(MouseEvent.CLICK); 
+				
+				// Maps the event to a specific event handler seperate from the rest of the MouseEvents.
+				//eventMapper.map(MouseEvent.ROLL_OVER, handleRollOver);
+				
+				// Remove all event handlers and destroys the EventMapper object.
+				//eventMapper.destroy(); 
+			}
+			
+			private function handleMouseEvents(event:MouseEvent):void
+			{
+				trace("Event happened! type: " + event.type);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Button id="myButton" />
+	
+</s:Application>
